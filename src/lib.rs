@@ -102,6 +102,11 @@ impl SnakeGrid {
             SnakeDirection::Left => snake[0] + ORTHO_DIR[2],
             SnakeDirection::Right => snake[0] + ORTHO_DIR[3],
         };
+        if !self.grid.contains(&new_head) {
+            // TODO: Handle graceful failure
+            panic!("Snake out of bounds");
+        }
+
         let mut new_snake = vec![new_head];
         for s in snake.iter() {
             if new_snake.len() < self.snake.current_length + 1 {
